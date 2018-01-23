@@ -23,10 +23,13 @@
                     <navigationItem key="navigationItem" id="iyJ-oD-HCX">
                         <barButtonItem key="leftBarButtonItem" title="Menu" id="YMt-dL-PYv">
                             <connections>
-                                <segue destination="bEm-2j-pgU" kind="presentation" id="Vpm-1E-jvP"/>
+                                <action selector="showMenu:" destination="BYZ-38-t0r" id="jkz-Rh-6Qh"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="bEm-2j-pgU" kind="presentation" identifier="showMenu" id="Jc5-fj-4Ej"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
