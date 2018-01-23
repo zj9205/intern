@@ -15,6 +15,8 @@
 		B64394042017134B00512E27 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64394032017134B00512E27 /* MenuViewController.swift */; };
 		B6439408201717ED00512E27 /* MenuAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6439407201717ED00512E27 /* MenuAnimator.swift */; };
 		B643940B20171AEB00512E27 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B643940A20171AEB00512E27 /* Helper.swift */; };
+		B643940D2017B1E200512E27 /* test.json in Resources */ = {isa = PBXBuildFile; fileRef = B643940C2017B1E100512E27 /* test.json */; };
+		B643940F2017BE5F00512E27 /* LocationSearchTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B643940E2017BE5F00512E27 /* LocationSearchTable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +30,8 @@
 		B64394032017134B00512E27 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		B6439407201717ED00512E27 /* MenuAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuAnimator.swift; sourceTree = "<group>"; };
 		B643940A20171AEB00512E27 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
+		B643940C2017B1E100512E27 /* test.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = test.json; sourceTree = "<group>"; };
+		B643940E2017BE5F00512E27 /* LocationSearchTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchTable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +67,7 @@
 				B6439409201717F800512E27 /* Views */,
 				B6439407201717ED00512E27 /* MenuAnimator.swift */,
 				B643940A20171AEB00512E27 /* Helper.swift */,
+				B643940C2017B1E100512E27 /* test.json */,
 				B64393F120170FE000512E27 /* AppDelegate.swift */,
 				B64393F520170FE000512E27 /* Main.storyboard */,
 				B64393F820170FE000512E27 /* Assets.xcassets */,
@@ -77,6 +82,7 @@
 			children = (
 				B64393F320170FE000512E27 /* MainViewController.swift */,
 				B64394032017134B00512E27 /* MenuViewController.swift */,
+				B643940E2017BE5F00512E27 /* LocationSearchTable.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -141,6 +147,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B64393FC20170FE000512E27 /* LaunchScreen.storyboard in Resources */,
+				B643940D2017B1E200512E27 /* test.json in Resources */,
 				B64393F920170FE000512E27 /* Assets.xcassets in Resources */,
 				B64393F720170FE000512E27 /* Main.storyboard in Resources */,
 			);
@@ -156,6 +163,7 @@
 				B64393F420170FE000512E27 /* MainViewController.swift in Sources */,
 				B6439408201717ED00512E27 /* MenuAnimator.swift in Sources */,
 				B643940B20171AEB00512E27 /* Helper.swift in Sources */,
+				B643940F2017BE5F00512E27 /* LocationSearchTable.swift in Sources */,
 				B64394042017134B00512E27 /* MenuViewController.swift in Sources */,
 				B64393F220170FE000512E27 /* AppDelegate.swift in Sources */,
 			);
