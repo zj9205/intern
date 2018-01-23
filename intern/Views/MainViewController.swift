@@ -103,12 +103,44 @@ extension MainViewController: SearchBarDelegate {
         annotation.title = placemark.name
         if let city = placemark.locality,
             let state = placemark.administrativeArea {
+            print("\(city) \(state)")
             annotation.subtitle = "\(city) \(state)"
         }
         mapView.addAnnotation(annotation)
         let span = MKCoordinateSpanMake(0.05, 0.05)
         let region = MKCoordinateRegionMake(placemark.coordinate, span)
         mapView.setRegion(region, animated: true)
+    }
+}
+
+extension MainViewController {
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        if annotation is MKUserLocation {
+            //return nil so map view draws "blue dot" for standard user location
+            return nil
+        }
+        let reuseId = "pin"
+        var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKPinAnnotationView
+        pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+        pinView?.pinTintColor = UIColor.orange
+        pinView?.canShowCallout = true
+        let smallSquare = CGSize(width: 50, height: 50)
+        let button = UIButton(frame: CGRect(origin: CGPoint.zero, size: smallSquare))
+        button.setTitle("Save", for: UIControlState.normal)
+        button.titleLabel?.sizeToFit()
+        button.backgroundColor = #colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1)
+        button.addTarget(self, action: #selector(getDirections), for: .touchUpInside)
+        pinView?.leftCalloutAccessoryView = button
+        return pinView
+    }
+
+    @objc func getDirections(){
+        if let selectedPin = selectedPin {
+            print(selectedPin.coordinate)
+//            let mapItem = MKMapItem(placemark: selectedPin)
+//            let launchOptions = [MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving]
+//            mapItem.openInMaps(launchOptions: launchOptions)
+        }
     }
 }
 
