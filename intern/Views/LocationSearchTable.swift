@@ -19,7 +19,7 @@ extension LocationSearchTable : UISearchResultsUpdating {
         guard let mapView = mapView,
             let searchBarText = searchController.searchBar.text else { return }
 
-        print("\(mapView.restorationIdentifier)")
+//        print("\(mapView.restorationIdentifier)")
         let request = MKLocalSearchRequest()
         request.naturalLanguageQuery = searchBarText
         request.region = mapView.region
@@ -31,5 +31,19 @@ extension LocationSearchTable : UISearchResultsUpdating {
             self.matchingItems = response.mapItems
             self.tableView.reloadData()
         }
+    }
+}
+
+extension LocationSearchTable {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return matchingItems.count
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "searchBarCell")!
+        let selectedItem = matchingItems[indexPath.row].placemark
+        cell.textLabel?.text = selectedItem.name
+        cell.detailTextLabel?.text = ""
+        return cell
     }
 }
