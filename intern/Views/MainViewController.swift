@@ -22,7 +22,9 @@ class MainViewController: UIViewController, UIViewControllerTransitioningDelegat
     let initialLocation = CLLocation(latitude: 37.331686, longitude: -122.030656)   // 1 infinite loop
     let regionRadius: CLLocationDistance = 1000
     
-    let pinLocation = CLLocation(latitude: 37.33168, longitude: -122.03065)
+    var pinLocation:[Position] = []
+        
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,6 +32,11 @@ class MainViewController: UIViewController, UIViewControllerTransitioningDelegat
         
         centerMapOnLocation(location: initialLocation)
         mapView.delegate = self
+        
+        pinLocation = [
+            Position(title: "AAA", locationName: "aaa", coordinate: CLLocationCoordinate2D(latitude: 37.33, longitude: -122.03)),
+            Position(title: "BBB", locationName: "bbb", coordinate: CLLocationCoordinate2D(latitude: 37.335, longitude: -122.035))
+        ]
         
         if let path = Bundle.main.path(forResource: "test", ofType: "json") {
             do {
@@ -59,6 +66,8 @@ class MainViewController: UIViewController, UIViewControllerTransitioningDelegat
         definesPresentationContext = true
         
         locationSearchTable.mapSearchDelegate = self
+        
+        mapView.addAnnotations(pinLocation)
 
     }
 
@@ -119,6 +128,7 @@ extension MainViewController {
             //return nil so map view draws "blue dot" for standard user location
             return nil
         }
+        
         let reuseId = "pin"
         var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKPinAnnotationView
         pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
@@ -126,20 +136,45 @@ extension MainViewController {
         pinView?.canShowCallout = true
         let smallSquare = CGSize(width: 50, height: 50)
         let button = UIButton(frame: CGRect(origin: CGPoint.zero, size: smallSquare))
-        button.setTitle("Save", for: UIControlState.normal)
         button.titleLabel?.sizeToFit()
+        
+        if let annotation = annotation as? Position {
+            if annotation.willBeSaved {
+                
+                button.backgroundColor = #colorLiteral(red: 0.4666666687, green: 0.7647058964, blue: 0.2666666806, alpha: 1)
+                button.setTitle("Saved", for: UIControlState.normal)
+                button.addTarget(self, action: #selector(deleteDirection), for: .touchUpInside)
+                
+                pinView?.leftCalloutAccessoryView = button
+                return pinView
+            }
+        }
+
         button.backgroundColor = #colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1)
-        button.addTarget(self, action: #selector(getDirections), for: .touchUpInside)
+        button.setTitle("Save", for: UIControlState.normal)
+        button.addTarget(self, action: #selector(saveDirection), for: .touchUpInside)
+        
         pinView?.leftCalloutAccessoryView = button
         return pinView
     }
 
-    @objc func getDirections(){
+    @objc func saveDirection(){
         if let selectedPin = selectedPin {
+            print("save")
             print(selectedPin.coordinate)
 //            let mapItem = MKMapItem(placemark: selectedPin)
 //            let launchOptions = [MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving]
 //            mapItem.openInMaps(launchOptions: launchOptions)
+        }
+    }
+    
+    @objc func deleteDirection(){
+        if let selectedPin = selectedPin {
+            print("delete")
+            print(selectedPin.coordinate)
+            //            let mapItem = MKMapItem(placemark: selectedPin)
+            //            let launchOptions = [MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving]
+            //            mapItem.openInMaps(launchOptions: launchOptions)
         }
     }
 }

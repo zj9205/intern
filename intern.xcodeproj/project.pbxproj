@@ -17,6 +17,7 @@
 		B643940B20171AEB00512E27 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B643940A20171AEB00512E27 /* Helper.swift */; };
 		B643940D2017B1E200512E27 /* test.json in Resources */ = {isa = PBXBuildFile; fileRef = B643940C2017B1E100512E27 /* test.json */; };
 		B643940F2017BE5F00512E27 /* LocationSearchTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B643940E2017BE5F00512E27 /* LocationSearchTable.swift */; };
+		B64394112017E40400512E27 /* Position.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64394102017E40400512E27 /* Position.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		B643940A20171AEB00512E27 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		B643940C2017B1E100512E27 /* test.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = test.json; sourceTree = "<group>"; };
 		B643940E2017BE5F00512E27 /* LocationSearchTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchTable.swift; sourceTree = "<group>"; };
+		B64394102017E40400512E27 /* Position.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Position.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +83,7 @@
 			isa = PBXGroup;
 			children = (
 				B64393F320170FE000512E27 /* MainViewController.swift */,
+				B64394102017E40400512E27 /* Position.swift */,
 				B64394032017134B00512E27 /* MenuViewController.swift */,
 				B643940E2017BE5F00512E27 /* LocationSearchTable.swift */,
 			);
@@ -161,6 +164,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B64393F420170FE000512E27 /* MainViewController.swift in Sources */,
+				B64394112017E40400512E27 /* Position.swift in Sources */,
 				B6439408201717ED00512E27 /* MenuAnimator.swift in Sources */,
 				B643940B20171AEB00512E27 /* Helper.swift in Sources */,
 				B643940F2017BE5F00512E27 /* LocationSearchTable.swift in Sources */,
