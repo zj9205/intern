@@ -38,10 +38,11 @@ class MainViewController: UIViewController, UIViewControllerTransitioningDelegat
         }
         
         // add search bar
-        let locationSearchTable = storyboard!.instantiateViewController(withIdentifier: "LocationSearchTable")
+        let locationSearchTable = storyboard!.instantiateViewController(withIdentifier: "LocationSearchTable") as! LocationSearchTable
+        locationSearchTable.mapView = mapView
         resultSearchController = UISearchController(searchResultsController: locationSearchTable)
-        resultSearchController?.searchResultsUpdater = locationSearchTable as? UISearchResultsUpdating
-        
+        resultSearchController?.searchResultsUpdater = locationSearchTable
+
         let searchBar = resultSearchController!.searchBar
         searchBar.sizeToFit()
         searchBar.placeholder = "Search for places"
