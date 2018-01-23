@@ -9,10 +9,16 @@
 import UIKit
 import MapKit
 
+protocol SearchBarDelegate {
+    func dropPinZoomIn(placemark:MKPlacemark)
+}
+
 class MainViewController: UIViewController, UIViewControllerTransitioningDelegate, MKMapViewDelegate {
     @IBOutlet weak var mapView: MKMapView!
-    var resultSearchController:UISearchController? = nil
     
+    var resultSearchController:UISearchController? = nil
+    var selectedPin:MKPlacemark? = nil
+
     let initialLocation = CLLocation(latitude: 37.331686, longitude: -122.030656)   // 1 infinite loop
     let regionRadius: CLLocationDistance = 1000
     
@@ -51,6 +57,9 @@ class MainViewController: UIViewController, UIViewControllerTransitioningDelegat
         resultSearchController?.hidesNavigationBarDuringPresentation = false
         resultSearchController?.dimsBackgroundDuringPresentation = true
         definesPresentationContext = true
+        
+        locationSearchTable.mapSearchDelegate = self
+
     }
 
     func centerMapOnLocation(location: CLLocation) {
@@ -82,5 +91,24 @@ class MainViewController: UIViewController, UIViewControllerTransitioningDelegat
         return DismissMenuAnimator()
     }
 
+}
+
+extension MainViewController: SearchBarDelegate {
+    func dropPinZoomIn(placemark:MKPlacemark){
+        selectedPin = placemark
+        mapView.removeAnnotations(mapView.annotations)
+        
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = placemark.coordinate
+        annotation.title = placemark.name
+        if let city = placemark.locality,
+            let state = placemark.administrativeArea {
+            annotation.subtitle = "\(city) \(state)"
+        }
+        mapView.addAnnotation(annotation)
+        let span = MKCoordinateSpanMake(0.05, 0.05)
+        let region = MKCoordinateRegionMake(placemark.coordinate, span)
+        mapView.setRegion(region, animated: true)
+    }
 }
 

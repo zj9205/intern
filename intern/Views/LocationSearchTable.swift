@@ -12,6 +12,7 @@ import MapKit
 class LocationSearchTable : UITableViewController {
     var matchingItems:[MKMapItem] = []
     var mapView: MKMapView? = nil
+    var mapSearchDelegate:SearchBarDelegate? = nil
 }
 
 extension LocationSearchTable : UISearchResultsUpdating {
@@ -70,4 +71,12 @@ func parseAddress(selectedItem:MKPlacemark) -> String {
         selectedItem.administrativeArea ?? ""
     )
     return addressLine
+}
+
+extension LocationSearchTable {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedItem = matchingItems[indexPath.row].placemark
+        mapSearchDelegate?.dropPinZoomIn(placemark: selectedItem)
+        dismiss(animated: true, completion: nil)
+    }
 }
