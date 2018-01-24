@@ -176,10 +176,6 @@ extension MainViewController {
             
             let newLocation = Position(title: selectedPin.title ?? "no name", locationName: cityState, coordinate: selectedPin.coordinate)
             pinLocation.append(newLocation)
-            
-//            let mapItem = MKMapItem(placemark: selectedPin)
-//            let launchOptions = [MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving]
-//            mapItem.openInMaps(launchOptions: launchOptions)
         }
     }
     
@@ -187,9 +183,6 @@ extension MainViewController {
         if let selectedPin = selectedPin {
             print("delete")
             print(selectedPin.coordinate)
-            //            let mapItem = MKMapItem(placemark: selectedPin)
-            //            let launchOptions = [MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving]
-            //            mapItem.openInMaps(launchOptions: launchOptions)
         }
     }
 }
