@@ -23,8 +23,6 @@ class MainViewController: UIViewController, UIViewControllerTransitioningDelegat
     let regionRadius: CLLocationDistance = 1000
     
     var pinLocation:[Position] = []
-        
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,17 +31,23 @@ class MainViewController: UIViewController, UIViewControllerTransitioningDelegat
         centerMapOnLocation(location: initialLocation)
         mapView.delegate = self
         
-        pinLocation = [
-            Position(title: "AAA", locationName: "aaa", coordinate: CLLocationCoordinate2D(latitude: 37.33, longitude: -122.03)),
-            Position(title: "BBB", locationName: "bbb", coordinate: CLLocationCoordinate2D(latitude: 37.335, longitude: -122.035))
-        ]
+//        pinLocation = [
+//            Position(title: "AAA", locationName: "aaa", coordinate: CLLocationCoordinate2D(latitude: 37.33, longitude: -122.03)),
+//            Position(title: "BBB", locationName: "bbb", coordinate: CLLocationCoordinate2D(latitude: 37.335, longitude: -122.035))
+//        ]
         
         if let path = Bundle.main.path(forResource: "test", ofType: "json") {
             do {
                 let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
                 let jsonResult = try JSONSerialization.jsonObject(with: data, options: .mutableLeaves)
-                if let jsonResult = jsonResult as? Dictionary<String, AnyObject>, let location = jsonResult["location"] as? [Any] {
-                    print(location)
+                if let jsonResult = jsonResult as? Dictionary<String, AnyObject>, let locations = jsonResult["location"] as? [Any] {
+                    for location in locations {
+                        let item = location as! [String:String]
+                        print(item)
+                        pinLocation.append(Position(title: item["title"] ?? "no title",
+                                                    locationName: item["locationName"] ?? "no location name",
+                                                    coordinate: CLLocationCoordinate2D(latitude: Double(item["latitude"] ?? "0")!, longitude: Double(item["longitude"] ?? "0")!)))
+                    }
                 }
             } catch {
                 // handle error
@@ -162,6 +166,17 @@ extension MainViewController {
         if let selectedPin = selectedPin {
             print("save")
             print(selectedPin.coordinate)
+            
+            var cityState:String = ""
+            if let city = selectedPin.locality,
+                let state = selectedPin.administrativeArea {
+                print("\(city) \(state)")
+                cityState = "\(city) \(state)"
+            }
+            
+            let newLocation = Position(title: selectedPin.title ?? "no name", locationName: cityState, coordinate: selectedPin.coordinate)
+            pinLocation.append(newLocation)
+            
 //            let mapItem = MKMapItem(placemark: selectedPin)
 //            let launchOptions = [MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving]
 //            mapItem.openInMaps(launchOptions: launchOptions)
