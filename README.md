@@ -5,7 +5,7 @@
 * swift 4
 * iOS 11
 
-## slide menu
+## side menu
 
 ![screen](screen.gif)
 
